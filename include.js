@@ -1,5 +1,3 @@
-
-
 //GV
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
@@ -23,7 +21,7 @@ async function Engine(){
     }
 
 
-    let timerforload = Math.max(reports.split(",").length*3500,14000)
+    let timerforload = Math.max(reports.split(",").length*3500,20000)
     console.log(timerforload)
     window.alert("Load Compensation Timer for: "+ timerforload/1000 +" seconds. Close this Popup to start timer.")
     await timer(timerforload)
@@ -184,7 +182,7 @@ if (document.URL.includes("https://app.lightspeedanalytics.net/embed/explore/"))
 
 
 
-    await timer(12000)
+    await timer(10000)
     let headerrowcount = document.querySelector("#explore-results-panel > div.non-empty-state > ng-transclude > div > lk-dataflux-data-table > lk-vis-table > div > div > div.lk-vis-table-main-wrapper > table > thead > tr").childElementCount
 
 
