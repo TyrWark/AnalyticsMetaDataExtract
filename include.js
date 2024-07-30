@@ -1,4 +1,5 @@
 
+
 //GV
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
@@ -7,6 +8,8 @@ var dataarray = new Array
 let url2 = new String
 let LSID = new String
 let LSCNAME = new String
+let reportcount = new Number
+var reports = new String
 
 
 
@@ -18,17 +21,22 @@ async function Engine(){
     for(let i = 0; i < LinkArray.length; i++){
         window.open(LinkArray[i])
     }
-    await timer(14000)
+
+
+    let timerforload = Math.max(reports.split(",").length*3500,14000)
+    console.log(timerforload)
+    window.alert("Load Compensation Timer for: "+ timerforload/1000 +" seconds. Close this Popup to start timer.")
+    await timer(timerforload)
     Parser()
 }
 
 function rows2cols(a) {
     var r = [];
     var t;
-  
+
     for (let i=0, iLen=a.length; i<iLen; i++) {
       t = a[i];
-  
+
       for (var j=0, jLen=t.length; j<jLen; j++) {
         if (!r[j]) {
           r[j] = [];
@@ -56,7 +64,7 @@ async function Parser(){
     for(let i =0; i < dataarray.length; i++){
         temparray.push(dataarray[i])
     }
-    
+
     dataarray = temparray
 
     let csvContent = "data:text/csv;charset=utf-8,";
@@ -157,7 +165,9 @@ if (window.top === window.self) {
 
 
     GM_registerMenuCommand('Get Info',async function() {
-        LinkArray = window.prompt("Insert Comma Spaced Report URLS. Remove Spaces","https://lightspeedanalytics.net/category/1/reports/66933,https://lightspeedanalytics.net/category/1/reports/68548,https://lightspeedanalytics.net/category/2/reports/85580").split(",")
+        reports = window.prompt("Insert Comma Spaced Report URLS. Remove Spaces","https://lightspeedanalytics.net/category/1/reports/66933,https://lightspeedanalytics.net/category/1/reports/68548,https://lightspeedanalytics.net/category/2/reports/85580")
+        LinkArray = reports.split(",")
+
         Engine()
     }, 'r')
 
@@ -174,7 +184,7 @@ if (document.URL.includes("https://app.lightspeedanalytics.net/embed/explore/"))
 
 
 
-    await timer(6000)
+    await timer(12000)
     let headerrowcount = document.querySelector("#explore-results-panel > div.non-empty-state > ng-transclude > div > lk-dataflux-data-table > lk-vis-table > div > div > div.lk-vis-table-main-wrapper > table > thead > tr").childElementCount
 
 
