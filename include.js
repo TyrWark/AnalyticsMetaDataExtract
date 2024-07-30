@@ -1,3 +1,19 @@
+// ==UserScript==
+// @name         FieldsFromReport
+// @namespace    http://tampermonkey.net/
+// @version      2024-07-24
+// @description  try to take over the world!
+// @author       Ty Wark
+// @match        https://lightspeedanalytics.net/cl_accounts/settings
+// @match        https://app.lightspeedanalytics.net/embed/explore/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=zendesk.com
+// @grant      GM_registerMenuCommand
+// ==/UserScript==
+
+
+
+
+
 //GV
 const timer = ms => new Promise(res => setTimeout(res, ms))
 
@@ -17,11 +33,12 @@ var reports = new String
 async function Engine(){
     console.log(LinkArray)
     for(let i = 0; i < LinkArray.length; i++){
-        window.open(LinkArray[i])
+       window.open(LinkArray[i])
+        await timer(100)
     }
 
 
-    let timerforload = Math.max(reports.split(",").length*3500,20000)
+    let timerforload = Math.max(reports.split(",").length*5000,90000)
     console.log(timerforload)
     window.alert("Load Compensation Timer for: "+ timerforload/1000 +" seconds. Close this Popup to start timer.")
     await timer(timerforload)
@@ -182,7 +199,7 @@ if (document.URL.includes("https://app.lightspeedanalytics.net/embed/explore/"))
 
 
 
-    await timer(10000)
+    await timer(40000)
     let headerrowcount = document.querySelector("#explore-results-panel > div.non-empty-state > ng-transclude > div > lk-dataflux-data-table > lk-vis-table > div > div > div.lk-vis-table-main-wrapper > table > thead > tr").childElementCount
 
 
